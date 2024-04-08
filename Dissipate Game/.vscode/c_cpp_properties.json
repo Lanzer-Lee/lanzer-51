@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "name": "menu",
+            "includePath": [
+                "f:\\Grade 3 Spring\\实验\\电子线路\\电子线路设计训练专题实验资料\\Project\\source\\head file",
+                "D:\\Keil_v5\\C51\\INC",
+                "f:\\Grade 3 Spring\\实验\\电子线路\\电子线路设计训练专题实验资料\\Project\\source\\source"
+            ],
+            "defines": [
+                "__C51__",
+                "__VSCODE_C51__",
+                "reentrant=",
+                "compact=",
+                "small=",
+                "large=",
+                "data=",
+                "idata=",
+                "pdata=",
+                "bdata=",
+                "xdata=",
+                "code=",
+                "bit=char",
+                "sbit=char",
+                "sfr=char",
+                "sfr16=int",
+                "sfr32=int",
+                "interrupt=",
+                "using=",
+                "_at_=",
+                "_priority_=",
+                "_task_="
+            ],
+            "intelliSenseMode": "${default}"
+        }
+    ],
+    "version": 4
+}

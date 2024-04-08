@@ -1,0 +1,294 @@
+C51 COMPILER V9.52.0.0   BUZZER                                                            04/07/2024 14:44:37 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE BUZZER
+OBJECT MODULE PLACED IN .\Objects\BUZZER.obj
+COMPILER INVOKED BY: D:\Keil4\C51\BIN\C51.EXE source\source\BUZZER.c BROWSE INCDIR(.\source\head file) DEBUG OBJECTEXTEN
+                    -D PRINT(.\Listings\BUZZER.lst) TABS(2) OBJECT(.\Objects\BUZZER.obj)
+
+line level    source
+
+   1          #include "BUZZER.h"
+   2          /*
+   3          #define SPEED 500
+   4          
+   5          #define P 0
+   6          #define L1  1
+   7          #define L1_ 2
+   8          #define L2  3
+   9          #define L2_ 4
+  10          #define L3  5
+  11          #define L4  6
+  12          #define L4_ 7
+  13          #define L5  8
+  14          #define L5_ 9
+  15          #define L6  10
+  16          #define L6_ 11
+  17          #define L7  12
+  18          #define M1  13
+  19          #define M1_ 14
+  20          #define M2  15
+  21          #define M2_ 16
+  22          #define M3  17
+  23          #define M4  18
+  24          #define M4_ 19
+  25          #define M5  20
+  26          #define M5_ 21
+  27          #define M6  22
+  28          #define M6_ 23
+  29          #define M7  24
+  30          #define H1  25
+  31          #define H1_ 26
+  32          #define H2  27
+  33          #define H2_ 28
+  34          #define H3  29
+  35          #define H4  30
+  36          #define H4_ 31
+  37          #define H5  32
+  38          #define H5_ 33
+  39          #define H6  34
+  40          #define H6_ 35
+  41          #define H7  36
+  42          
+  43          uint16_t FreqTable[]={
+  44            0,
+  45            63628,63731,63835,63928,64021,64103,64185,64260,64331,64400,64463,64528,
+  46            64580,64633,64684,64732,64777,64820,64860,64898,64934,64968,65000,65030,
+  47            65058,65085,65110,65134,65157,65178,65198,65217,65235,65252,65268,65283,
+  48          };
+  49          
+  50          uint8_t code Music[]={
+  51            //1
+  52            P,  4,
+  53            P,  4,
+  54            P,  4,
+C51 COMPILER V9.52.0.0   BUZZER                                                            04/07/2024 14:44:37 PAGE 2   
+
+  55            M6, 2,
+  56            M7, 2,
+  57            
+  58            H1, 4+2,
+  59            M7, 2,
+  60            H1, 4,
+  61            H3, 4,
+  62            
+  63            M7, 4+4+4,
+  64            M3, 2,
+  65            M3, 2,
+  66            
+  67            //2
+  68            M6, 4+2,
+  69            M5, 2,
+  70            M6, 4,
+  71            H1, 4,
+  72            
+  73            M5, 4+4+4,
+  74            M3, 4,
+  75            
+  76            M4, 4+2,
+  77            M3, 2,
+  78            M4, 4,
+  79            H1, 4,
+  80            
+  81            //3
+  82            M3, 4+4,
+  83            P,  2,
+  84            H1, 2,
+  85            H1, 2,
+  86            H1, 2,
+  87            
+  88            M7, 4+2,
+  89            M4_,2,
+  90            M4_,4,
+  91            M7, 4,
+  92            
+  93            M7, 8,
+  94            P,  4,
+  95            M6, 2,
+  96            M7, 2,
+  97            
+  98            //4
+  99            H1, 4+2,
+ 100            M7, 2,
+ 101            H1, 4,
+ 102            H3, 4,
+ 103            
+ 104            M7, 4+4+4,
+ 105            M3, 2,
+ 106            M3, 2,
+ 107            
+ 108            M6, 4+2,
+ 109            M5, 2,
+ 110            M6, 4,
+ 111            H1, 4,
+ 112            
+ 113            //5
+ 114            M5, 4+4+4,
+ 115            M2, 2,
+ 116            M3, 2,
+C51 COMPILER V9.52.0.0   BUZZER                                                            04/07/2024 14:44:37 PAGE 3   
+
+ 117            
+ 118            M4, 4,
+ 119            H1, 2,
+ 120            M7, 2+2,
+ 121            H1, 2+4,
+ 122            
+ 123            H2, 2,
+ 124            H2, 2,
+ 125            H3, 2,
+ 126            H1, 2+4+4,
+ 127            
+ 128            //6
+ 129            H1, 2,
+ 130            M7, 2,
+ 131            M6, 2,
+ 132            M6, 2,
+ 133            M7, 4,
+ 134            M5_,4,
+ 135            
+ 136            
+ 137            M6, 4+4+4,
+ 138            H1, 2,
+ 139            H2, 2,
+ 140            
+ 141            H3, 4+2,
+ 142            H2, 2,
+ 143            H3, 4,
+ 144            H5, 4,
+ 145            
+ 146            //7
+ 147            H2, 4+4+4,
+ 148            M5, 2,
+ 149            M5, 2,
+ 150            
+ 151            H1, 4+2,
+ 152            M7, 2,
+ 153            H1, 4,
+ 154            H3, 4,
+ 155            
+ 156            H3, 4+4+4+4,
+ 157            
+ 158            //8
+ 159            M6, 2,
+ 160            M7, 2,
+ 161            H1, 4,
+ 162            M7, 4,
+ 163            H2, 2,
+ 164            H2, 2,
+ 165            
+ 166            H1, 4+2,
+ 167            M5, 2+4+4,
+ 168            
+ 169            H4, 4,
+ 170            H3, 4,
+ 171            H3, 4,
+ 172            H1, 4,
+ 173            
+ 174            //9
+ 175            H3, 4+4+4,
+ 176            H3, 4,
+ 177            
+ 178            H6, 4+4,
+C51 COMPILER V9.52.0.0   BUZZER                                                            04/07/2024 14:44:37 PAGE 4   
+
+ 179            H5, 4,
+ 180            H5, 4,
+ 181            
+ 182            H3, 2,
+ 183            H2, 2,
+ 184            H1, 4+4,
+ 185            P,  2,
+ 186            H1, 2,
+ 187            
+ 188            //10
+ 189            H2, 4,
+ 190            H1, 2,
+ 191            H2, 2,
+ 192            H2, 4,
+ 193            H5, 4,
+ 194            
+ 195            H3, 4+4+4,
+ 196            H3, 4,
+ 197            
+ 198            H6, 4+4,
+ 199            H5, 4+4,
+ 200            
+ 201            //11
+ 202            H3, 2,
+ 203            H2, 2,
+ 204            H1, 4+4,
+ 205            P,  2,
+ 206            H1, 2,
+ 207            
+ 208            H2, 4,
+ 209            H1, 2,
+ 210            H2, 2+4,
+ 211            M7, 4,
+ 212            
+ 213            M6, 4+4+4,
+ 214            P,  4,
+ 215            
+ 216            0xFF  //end flag
+ 217          };
+ 218          */
+ 219          uint8_t buzzer_state=0;
+ 220          //uint8_t FreqSelect=0,MusicSelect=0;
+ 221          /*
+ 222          void buzzer_init(void){
+ 223              P74OUT&=0xFF;
+ 224              P74OUT|=0x01;
+ 225              P4&=0xFD;
+ 226              XBR2|=0x40;
+ 227              XBR1 |= 0x10;
+ 228              XBR2 |= 0x44;
+ 229          }
+ 230          */
+ 231          /*
+ 232          void buzzer_high(void){
+ 233            P4|=0x02;
+ 234          }
+ 235          
+ 236          void buzzer_low(void){
+ 237            P4&=0xFD;
+ 238          }
+ 239          */
+ 240          /*
+C51 COMPILER V9.52.0.0   BUZZER                                                            04/07/2024 14:44:37 PAGE 5   
+
+ 241          void buzzer_inverse(void){
+ 242            if(buzzer_state==0) {buzzer_high();buzzer_state=1;}
+ 243            else {buzzer_low();buzzer_state=0;}
+ 244          }
+ 245          */
+ 246          /*
+ 247          void play_music(void){
+ 248            if(Music[MusicSelect]!=0xFF){
+ 249              FreqSelect=Music[MusicSelect];  
+ 250              MusicSelect++;
+ 251              delay_ms(SPEED/4*Music[MusicSelect]); 
+ 252              MusicSelect++;
+ 253              TR1=0;
+ 254              delay_ms(5);  
+ 255              TR1=1;
+ 256            }
+ 257            else{
+ 258              TR1=0;
+ 259              return;
+ 260            }
+ 261          }
+ 262          */
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

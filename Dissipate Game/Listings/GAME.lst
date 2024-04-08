@@ -1,0 +1,184 @@
+C51 COMPILER V9.52.0.0   GAME                                                              04/07/2024 14:44:37 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE GAME
+OBJECT MODULE PLACED IN .\Objects\GAME.obj
+COMPILER INVOKED BY: D:\Keil4\C51\BIN\C51.EXE source\source\GAME.c BROWSE INCDIR(.\source\head file) DEBUG OBJECTEXTEND 
+                    -PRINT(.\Listings\GAME.lst) TABS(2) OBJECT(.\Objects\GAME.obj)
+
+line level    source
+
+   1          #include "GAME.h"
+   2          
+   3          uint8_t cursor=0;
+   4          uint8_t game_level4[LEVEL_LEN]={CURSOR,BLOCK0,BLOCK0,BLOCK0,BLOCK0,BLOCK0,BLOCK0,BLOCK0,BLOCK0,BLOCK0,BLOC
+             -K0,BLOCK0,BLOCK0,BLOCK0,BLOCK0,BLOCK0,0x00};
+   5          uint8_t code block_init[3][LEVEL_LEN]={
+   6              {BLOCK0,BLOCK1,BLOCK2,BLOCK2,BLOCK1,BLOCK1,BLOCK1,BLOCK3,BLOCK4,BLOCK1,BLOCK2,BLOCK3,BLOCK4,BLOCK4,BLO
+             -CK2,BLOCK0,0x00},
+   7              {BLOCK0,BLOCK1,BLOCK2,BLOCK2,BLOCK2,BLOCK1,BLOCK2,BLOCK4,BLOCK4,BLOCK1,BLOCK4,BLOCK4,BLOCK4,BLOCK2,BLO
+             -CK2,BLOCK0,0x00},
+   8              {BLOCK0,BLOCK1,BLOCK1,BLOCK2,BLOCK1,BLOCK1,BLOCK1,BLOCK3,BLOCK4,BLOCK1,BLOCK2,BLOCK3,BLOCK4,BLOCK2,BLO
+             -CK2,BLOCK0,0x00}
+   9          };
+  10          uint8_t block[3][LEVEL_LEN]={0};
+  11          uint8_t pad=9;
+  12          uint8_t score=0;
+  13          
+  14          void game_init(void){
+  15   1          uint8_t i=0,j=0;
+  16   1          for(i=0;i<3;i++){
+  17   2              for(j=0;j<LEVEL_LEN;j++){
+  18   3                  block[i][j]=block_init[i][j];
+  19   3              }
+  20   2          }
+  21   1          score=0;
+  22   1          pad=9;
+  23   1          set_cursor(0);
+  24   1      }
+  25          
+  26          void set_cursor(uint8_t position){
+  27   1          game_level4[position]=CURSOR;
+  28   1          game_level4[cursor]=BLOCK0;
+  29   1          cursor=position;
+  30   1      }
+  31          
+  32          void cursor_update(void){
+  33   1          LineClear(3);
+  34   1          WriteStr(3,0,game_level4);
+  35   1      }
+  36          
+  37          void block_update(void){
+  38   1          LineClear(0);
+  39   1          LineClear(1);
+  40   1          LineClear(2);
+  41   1          WriteStr(2,0,block[2]);
+  42   1          WriteStr(1,0,block[1]);
+  43   1          WriteStr(0,0,block[0]);
+  44   1      }
+  45          
+  46          void press_right_key(void){
+  47   1          if(P5==KEY_R){
+  48   2              if(cursor+1==LEVEL_LEN-1) set_cursor(1);
+  49   2              else set_cursor(cursor+1);
+  50   2              block_down();
+C51 COMPILER V9.52.0.0   GAME                                                              04/07/2024 14:44:37 PAGE 2   
+
+  51   2          }     
+  52   1      }
+  53          
+  54          void press_left_key(void){
+  55   1          if(P5==KEY_L){
+  56   2              if(cursor-1<=0) set_cursor(LEVEL_LEN-2);
+  57   2              else set_cursor(cursor-1);
+  58   2              block_down();
+  59   2          }
+  60   1      }
+  61          
+  62          void press_middle_key(void){
+  63   1          P4|=0x02;
+  64   1          if(P5==KEY_M){
+  65   2              block_scan();
+  66   2          block_update();
+  67   2              pad--;
+  68   2          }
+  69   1          delay_ms(200);
+  70   1          P4&=0xFD;
+  71   1      }
+  72          
+  73          void block_scan(void){
+  74   1          uint8_t cursor_bolck=block[2][cursor];
+  75   1          uint8_t pointer=cursor;
+  76   1          if(cursor_bolck==BLOCK0){pad++;return;}
+  77   1          else{
+  78   2              block[2][cursor]=BLOCK0;
+  79   2              while(block[2][pointer+1]==cursor_bolck){
+  80   3                  score++;
+  81   3                  pointer++;
+  82   3                  block[2][pointer]=BLOCK0;
+  83   3              }
+  84   2              pointer=cursor;
+  85   2              while(block[2][pointer-1]==cursor_bolck){
+  86   3                  score++;
+  87   3                  pointer--;
+  88   3                  block[2][pointer]=BLOCK0;
+  89   3              }
+  90   2              pointer=cursor;
+  91   2              if(block[1][cursor]==cursor_bolck){
+  92   3                  score++;
+  93   3                  block[1][cursor]=BLOCK0;
+  94   3                  while(block[1][pointer+1]==cursor_bolck){
+  95   4                      score++;
+  96   4                      pointer++;
+  97   4                      block[1][pointer]=BLOCK0;
+  98   4                  }
+  99   3                  pointer=cursor;
+ 100   3                  while(block[1][pointer-1]==cursor_bolck){
+ 101   4                      score++;
+ 102   4                      pointer--;
+ 103   4                      block[1][pointer]=BLOCK0;
+ 104   4                  }
+ 105   3                  pointer=cursor;
+ 106   3                  if(block[0][cursor]==cursor_bolck){
+ 107   4                      score++;
+ 108   4                      block[0][cursor]=BLOCK0;
+ 109   4                      while(block[1][pointer+1]==cursor_bolck){
+ 110   5                          score++;
+ 111   5                          pointer++;
+ 112   5                          block[1][pointer]=BLOCK0;
+C51 COMPILER V9.52.0.0   GAME                                                              04/07/2024 14:44:37 PAGE 3   
+
+ 113   5                      }
+ 114   4                      pointer=cursor;
+ 115   4                      while(block[1][pointer-1]==cursor_bolck){
+ 116   5                          score++;
+ 117   5                          pointer--;
+ 118   5                          block[1][pointer]=BLOCK0;
+ 119   5                      }
+ 120   4                  }
+ 121   3              }
+ 122   2          }
+ 123   1      }
+ 124          
+ 125          void block_down(void){
+ 126   1          uint8_t pointer=0;
+ 127   1          for(pointer=1;pointer<LEVEL_LEN-2;pointer++){
+ 128   2              if(block[1][pointer]==BLOCK0){
+ 129   3                  block[1][pointer]=block[0][pointer];
+ 130   3                  block[0][pointer]=BLOCK0;
+ 131   3              }
+ 132   2              if(block[2][pointer]==BLOCK0){
+ 133   3                  block[2][pointer]=block[1][pointer];
+ 134   3                  block[1][pointer]=block[0][pointer];
+ 135   3                  block[0][pointer]=BLOCK0;
+ 136   3              }
+ 137   2          }
+ 138   1      }
+ 139          /*
+ 140          void auto_play(void){
+ 141              cursor=1;
+ 142              cursor_update();
+ 143              while(cursor<8){
+ 144                  //delay_ms(500);
+ 145                  block_scan();
+ 146                  block_update();
+ 147                  delay_ms(500);
+ 148                  set_cursor(cursor+1);
+ 149                  cursor_update();
+ 150              }
+ 151          }
+ 152          */
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    476    ----
+   CONSTANT SIZE    =     51    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     71    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
